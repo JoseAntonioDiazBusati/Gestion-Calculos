@@ -26,7 +26,7 @@ fun main() {
 }
 */
 
-fun main() {
+fun main(args: Array<String>) {
     Calculadora(Consola()).iniciar()
 }
 
