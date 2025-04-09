@@ -1,7 +1,9 @@
 package es.iesraprog2425.pruebaes
 
+import CalcBasicaConErrorACorregir.app.Controlador
 import es.iesraprog2425.pruebaes.app.Calculadora
 import es.iesraprog2425.pruebaes.ui.Consola
+import java.io.File
 
 /*
 fun main() {
@@ -27,7 +29,10 @@ fun main() {
 */
 
 fun main(args: Array<String>) {
+    val ruta: File = File("./Log")
+    Controlador().existeRuta(ruta)
     Calculadora(Consola()).iniciar()
+    Controlador().iniciarLog(ruta)
 }
 
 
