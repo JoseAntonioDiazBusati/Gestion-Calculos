@@ -31,8 +31,9 @@ fun main() {
 fun main(args: Array<String>) {
     val ruta: File = File("./Log")
     Controlador().existeRuta(ruta)
-    Calculadora(Consola()).iniciar()
     Controlador().iniciarLog(ruta)
+    Calculadora(Consola()).iniciar()
+
 }
 
 

@@ -1,9 +1,10 @@
 package es.iesraprog2425.pruebaes.app
 
+import CalcBasicaConErrorACorregir.utils.Logs
 import es.iesraprog2425.pruebaes.model.Operadores
 import es.iesraprog2425.pruebaes.ui.IEntradaSalida
 
-class Calculadora(private val ui: IEntradaSalida) {
+class Calculadora(private val ui: IEntradaSalida,private val logs: Logs? = null) {
 
     private fun pedirNumero(msj: String, msjError: String = "Número no válido!"): Double {
         return ui.pedirDouble(msj) ?: throw InfoCalcException(msjError)
@@ -29,9 +30,11 @@ class Calculadora(private val ui: IEntradaSalida) {
                 ui.limpiarPantalla()
                 val (numero1, operador, numero2) = pedirInfo()
                 val resultado = realizarCalculo(numero1, operador, numero2)
-                ui.mostrar("Resultado: %.2f".format(resultado))
+                val consola = ui.mostrar("Resultado: %.2f".format(resultado))
+                logs?.logInfo(consola.toString())
             } catch (e: InfoCalcException) {
-                ui.mostrarError(e.message ?: "Se ha producido un error!")
+                val consola = ui.mostrarError(e.message ?: "Se ha producido un error!")
+                logs?.logInfo(consola.toString())
             }
         } while (ui.preguntar())
         ui.limpiarPantalla()
