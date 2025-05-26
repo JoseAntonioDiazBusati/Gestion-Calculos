@@ -9,4 +9,3 @@ interface ILogService {
     fun crearNuevoLog()
     fun crearRutaLog(ruta: String): Boolean
 }
-}

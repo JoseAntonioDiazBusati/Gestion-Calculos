@@ -1,5 +1,8 @@
 package service
 
+import model.Calculadora
+import repo.RepoLog
+
 class LogService(private val repoLog: RepoLog): ILogService {
     override fun registrarEntradaLog(msj: String) {
         repoLog.registrarEntrada(msj)
