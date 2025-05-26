@@ -1,20 +1,20 @@
-package es.iesraprog2425.pruebaes.ui
+package ui
 
 import java.util.Scanner
 
-class Consola : IEntradaSalida {
+class Consola: IConsola {
     private val scanner = Scanner(System.`in`)
 
-    override fun mostrar(msj: String, salto: Boolean) {
-        print("$msj${if (salto) "\n" else ""}")
+    override fun mostrar(msj: String) {
+        println(msj)
     }
 
-    override fun mostrarError(msj: String, salto: Boolean) {
-        mostrar("ERROR - $msj", salto)
+    override fun mostrarError(msj: String) {
+        mostrar("ERROR - $msj")
     }
 
     override fun pedirInfo(msj: String): String {
-        if (msj.isNotEmpty()) mostrar(msj, false)
+        if (msj.isNotEmpty()) mostrar(msj)
         return scanner.nextLine().trim()
     }
 
@@ -32,14 +32,14 @@ class Consola : IEntradaSalida {
             when (respuesta) {
                 "s", "si" -> return true
                 "n", "no" -> return false
-                else -> mostrarError("Respuesta no válida. Responde con s, n, si o no.")
+                else -> mostrarError("Respuesta no válida!!! Responde con s , n / si o no.")
             }
         } while (true)
     }
 
     override fun limpiarPantalla(numSaltos: Int) {
         if (System.console() != null) {
-            mostrar("\u001b[H\u001b[2J", false)
+            mostrar("\u001b[H\u001b[2J")
             System.out.flush()
         } else {
             repeat(numSaltos) {
@@ -48,5 +48,8 @@ class Consola : IEntradaSalida {
         }
     }
 
+    override fun pausa(msj: String) {
+        pedirInfo("\n" + msj)
+        mostrar()
+    }
 }
-
